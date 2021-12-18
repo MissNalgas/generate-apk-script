@@ -2,12 +2,13 @@
 
 send_message() {
 	TXT=''
+	API_KEY=`cat ./apikey`
 	for i in $@
 	do
 		TXT="$TXT $i"
 	done
 
-	curl "https://lnk.mssnapps.com/api/notification" -X POST -H 'Content-Type: application/json; charset=utf-8' -d '{"message": "'"$TXT"'", "apiKey": "API_KEY_REMOVED"}'
+	curl "https://lnk.mssnapps.com/api/notification" -X POST -H 'Content-Type: application/json; charset=utf-8' -d '{"message": "'"$TXT"'", "apiKey": "'"$API_KEY"'"}'
 }
 
 print_error() {
@@ -120,7 +121,13 @@ generate_production() {
 }
 
 init() {
+	APIKEY=`echo ${BASH_SOURCE[0]} | sed -En "s/\/([a-z]|[A-Z])*.sh$/\/apikey/p"`
 	
+	if ! test -f $APIKEY; then
+		echo 'apikey does not exist'
+		exit 1;
+	fi
+
 	initial_questions
 	if [ $? -gt 0 ]; then
 		exit 1;
