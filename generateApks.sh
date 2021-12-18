@@ -2,7 +2,8 @@
 
 send_message() {
 	TXT=''
-	API_KEY=`cat ./apikey`
+	APIKEY=`echo ${BASH_SOURCE[0]} | sed -En "s/\/([a-z]|[A-Z])*.sh$/\/apikey/p"`
+	API_KEY=`cat $APIKEY`
 	for i in $@
 	do
 		TXT="$TXT $i"
