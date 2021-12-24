@@ -18,7 +18,7 @@ All the files will be placed in `~/apks/`.
 
 ## Dependencies
 
-- Lnk notifications API
+- Lnk notifications API ([lnk](https://lnk.mssnapps.com/))
 
 - curl
 
