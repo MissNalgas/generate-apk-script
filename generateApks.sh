@@ -59,7 +59,7 @@ generate_development() {
 		print_error 'Error writing gradle'
 	fi
 
-	if sed -i "" -e "s/versionName \"[0-9]*.[0-9]*\"/versionName \"${version_name}\"/" ./android/app/build.gradle
+	if sed -i "" -e "s/versionName \"[^[:space:]]*\"/versionName \"${version_name}\"/" ./android/app/build.gradle
 	then
 		echo 'Gradle written!'
 	else
@@ -98,7 +98,7 @@ generate_production() {
 	fi
 
 	if sed -i "" -e "s/versionCode [0-9]*/versionCode ${version_code_prod}/" ./android/app/build.gradle &&
-	sed -i "" -e "s/versionName \"[0-9]*.[0-9]*\"/versionName \"${version_name_prod}\"/" ./android/app/build.gradle
+	sed -i "" -e "s/versionName \"[^[:space:]]*\"/versionName \"${version_name_prod}\"/" ./android/app/build.gradle
 	then
 		echo 'Gradle written!'
 	else
